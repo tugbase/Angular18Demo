@@ -1,0 +1,81 @@
+@if (selectedBook()) {
+  <div class="detail-block">
+    <div class="detail-block__top">
+      <div class="detail-block__top__image">
+        <img
+          [alt]="selectedBook()?.title"
+          [src]="selectedBook()?.imageUrl"
+        />
+      </div>
+      <div class="detail-block__top__text">
+        <div class="detail-block__top__text__title">
+          <span>{{ selectedBook()?.title }}</span>
+        </div>
+        <div class="detail-block__top__text__desc">
+          <span>{{ selectedBook()?.description }}</span>
+          <span
+            >Page Number : {{ selectedBook()?.page }}</span
+          >
+          @if (selectedBook()?.award) {
+            <span>Awards: {{ selectedBook()?.award }}</span>
+          }
+        </div>
+        <div class="detail-block__top__text__props">
+          <div class="detail-block__text__props__item">
+            @if ((selectedBook()?.rateList)!.length > 0) {
+              <span>The Rate: {{ bookRate() }} / 10</span>
+            } @else {
+              <span>The book has not been rated yet!</span>
+            }
+          </div>
+          <div class="detail-block__top__text__props__item">
+            @if (selectedBook()?.isRead) {
+              <span>You have already read this book!</span>
+            }
+          </div>
+          <div class="detail-block__top__text__props__item">
+            @if (selectedBook()?.classic) {
+              <span>This book is a classic!</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="detail-block__buttons">
+      @if (isMyBook()) {
+        <a
+          [routerLink]="'/edit-book/' + bookId()"
+          mat-flat-button
+          >Edit Book</a
+        >
+        <button (click)="deleteBook()" mat-flat-button>
+          Delete Book
+        </button>
+      }
+      @if (userId()) {
+        <button (click)="openReview()" mat-flat-button>
+          Add Review
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="book-review-list">
+    @for (review of reviews(); track review.id) {
+      <mat-card class="review-card">
+        <mat-card-header>
+          <div mat-card-avatar class="review-avatar"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ review.review }}</p>
+        </mat-card-content>
+      </mat-card>
+    } @empty {
+      <div>There is no review yet</div>
+    }
+  </div>
+}
+
+<app-review-dialog
+  (review)="addBookReview($event)"
+></app-review-dialog>

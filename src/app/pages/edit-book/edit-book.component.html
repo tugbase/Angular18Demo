@@ -1,0 +1,6 @@
+@if (bookToUpdated()) {
+  <app-book-form
+    (newBook)="updateBook($event)"
+    [bookToEdit]="bookToUpdated()"
+  ></app-book-form>
+}

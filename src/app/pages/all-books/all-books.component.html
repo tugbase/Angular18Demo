@@ -1,0 +1,54 @@
+<div class="search-area">
+  <mat-form-field class="example-form-field">
+    <mat-label>Search...</mat-label>
+    <input [(ngModel)]="searchInput" matInput type="text" />
+    @if (searchInput()) {
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="searchInput.set('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Sort</mat-label>
+    <mat-select [(ngModel)]="sortInput">
+      <mat-option value="rate">Rate</mat-option>
+      <mat-option value="title">Title</mat-option>
+      <mat-option value="author">Author</mat-option>
+    </mat-select>
+    @if (sortInput()) {
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="sortInput.set('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+</div>
+<div class="content">
+  @for (book of shownBooks(); track book.id) {
+    <app-book-list-item
+      [bookItem]="book"
+      (rate)="updateRate($event)"
+    ></app-book-list-item>
+  }
+</div>
+<mat-paginator
+  #paginator
+  (page)="handlePageEvent($event)"
+  [length]="allBooks().length"
+  [pageSizeOptions]="[5, 10, 25]"
+  [pageSize]="10"
+  [showFirstLastButtons]="true"
+  aria-label="Select page"
+  class="demo-paginator"
+>
+</mat-paginator>

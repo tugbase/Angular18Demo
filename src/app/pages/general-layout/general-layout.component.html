@@ -1,0 +1,28 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenav mode="side">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">Main Page</a>
+      <a mat-list-item routerLink="/books">All Books</a>
+      @if (!loggedIn()) {
+        <a mat-list-item (click)="signIn()"
+          >Login/Sign up</a
+        >
+      } @else {
+        <a mat-list-item routerLink="/my-books">My Books</a>
+        <a mat-list-item routerLink="/add-book">Add Book</a>
+        <a (click)="logout()" mat-list-item>Logout</a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button (click)="sidenav.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span style="margin-left: 20px">The Library</span>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

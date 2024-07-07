@@ -1,0 +1,45 @@
+<!-- book-item.component.html -->
+<mat-card class="book-item">
+  <mat-card-header>
+    <mat-card-header
+      >{{ bookItem()?.title }}
+    </mat-card-header>
+    <span>{{ bookItem().author }}</span>
+  </mat-card-header>
+  <img
+    [alt]="bookItem()?.title"
+    [src]="bookItem()?.imageUrl"
+    mat-card-image
+  />
+  <mat-card-content>
+    @if (!isNaN(Number(averageRate()))) {
+      <span>Rate: {{ averageRate() }} </span>
+    } @else {
+      <span>Rate: ?? </span>
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-form-field appearance="fill">
+      <mat-label>Rate this book</mat-label>
+      <mat-select [(value)]="selectedRate">
+        @for (rate of rates; track rate) {
+          <mat-option [value]="rate">{{ rate }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button
+      (click)="rateBook()"
+      color="primary"
+      mat-flat-button
+    >
+      Rate
+    </button>
+  </mat-card-actions>
+  <div class="go-to">
+    <a
+      [routerLink]="'/my-books/' + bookItem().id"
+      mat-raised-button
+      >Go to detail</a
+    >
+  </div>
+</mat-card>

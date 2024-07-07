@@ -1,0 +1,111 @@
+<form (ngSubmit)="submit()" [formGroup]="bookForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Book Title</mat-label>
+    <input
+      [class.invalid]="bookForm.controls['title'].errors"
+      formControlName="title"
+      id="title"
+      matInput
+    />
+    @if (bookForm.controls['title'].errors) {
+      <mat-error>Please enter a valid book name!</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Book Image Url</mat-label>
+    <input
+      [class.invalid]="bookForm.controls['imageUrl'].errors"
+      formControlName="imageUrl"
+      id="imageUrl"
+      matInput
+      type="url"
+    />
+    @if (bookForm.controls['imageUrl'].errors) {
+      <mat-error>Please add a valid image url!</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="author-page">
+    <mat-form-field appearance="fill" class="author">
+      <mat-label>Author</mat-label>
+      <input
+        [class.invalid]="bookForm.controls['author'].errors"
+        formControlName="author"
+        id="author"
+        matInput
+      />
+      @if (bookForm.controls['author'].errors) {
+        <mat-error>Please enter author name!</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="page">
+      <mat-label>Total Page</mat-label>
+      <input
+        [class.invalid]="bookForm.controls['page'].errors"
+        formControlName="page"
+        id="page"
+        matInput
+        type="number"
+      />
+      @if (bookForm.controls['page'].errors) {
+        <mat-error
+          >Please add a valid page number!</mat-error
+        >
+      }
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="fill" class="form-control">
+    <mat-label>Awards (if any)</mat-label>
+    <input formControlName="award" id="award" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Book Description</mat-label>
+    <textarea
+      formControlName="description"
+      id="description"
+      matInput
+      rows="5"
+    ></textarea>
+  </mat-form-field>
+
+  <div>
+    <mat-checkbox formControlName="classic" id="classic"
+      >Please check if it is a classic book!</mat-checkbox
+    >
+  </div>
+
+  <div>
+    <mat-checkbox formControlName="isRead" id="isRead"
+      >Please check if you have already read this
+      book!</mat-checkbox
+    >
+  </div>
+  @if (bookForm.get('isRead')?.value) {
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Rate the book</mat-label>
+        <mat-select formControlName="rate" id="rate">
+          @for (point of pointArray; track point) {
+            <mat-option [value]="point">{{
+              point
+            }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  }
+
+  @if (bookToEdit()) {
+    <button color="primary" mat-raised-button type="submit">
+      Edit Book
+    </button>
+  } @else {
+    <button color="primary" mat-raised-button type="submit">
+      Add Book
+    </button>
+  }
+</form>

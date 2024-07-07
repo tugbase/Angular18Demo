@@ -1,0 +1,30 @@
+<ng-template #dialogTemplate>
+  <mat-dialog-content>
+    <form
+      (ngSubmit)="submitReview()"
+      [formGroup]="reviewForm"
+    >
+      <h2 mat-dialog-title>{{ title() }}</h2>
+      <mat-form-field class="full-width">
+        <mat-label>Please add your review!</mat-label>
+        <textarea
+          formControlName="review"
+          matInput
+          rows="7"
+        ></textarea>
+      </mat-form-field>
+      <div class="submit-button">
+        <button
+          color="primary"
+          mat-raised-button
+          type="submit"
+        >
+          Add review
+        </button>
+      </div>
+      <div class="actions">
+        <button (click)="close()" mat-button>Close</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</ng-template>

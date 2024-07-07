@@ -1,0 +1,100 @@
+@import "../../../styles"
+.book-review-list
+  display: flex
+  flex-direction: column
+  gap: 16px
+  padding: 16px
+
+
+.review-card
+  width: 100%
+
+.review-avatar
+  background-color: #3f51b5
+
+.detail-block
+  display: flex
+  flex-direction: column
+  padding: 1rem
+  margin: 2rem auto
+
+  align-items: center
+
+  @media only screen and (max-width: $bp-hg)
+    width: unset
+
+
+  &__top
+    width: 100%
+    display: flex
+    padding: 1rem
+    justify-content: space-between
+    border: 1px solid $cadmium-green
+    border-radius: 20px
+    margin-bottom: 1rem
+    gap: 1rem
+    @media only screen and (max-width: $bp-hg)
+      box-shadow: none
+
+    @media only screen and (max-width: $bp-md)
+      flex-direction: column
+
+    &__image
+      display: flex
+      flex: 40%
+      justify-content: center
+      padding: 0.5rem
+      @media only screen and (max-width: $bp-lg)
+        height: 200px
+
+      @media only screen and (max-width: $bp-md)
+        width: 100%
+        height: auto
+
+      img
+        width: 100%
+        height: auto
+        display: block
+        object-fit: cover
+
+
+    &__text
+      flex: 70%
+      display: flex
+      flex-direction: column
+      justify-content: flex-start
+      gap: 2rem
+      padding: 0.5rem
+
+      &__desc
+        display: flex
+        flex-direction: column
+        gap: 4rem
+
+      &__title
+        display: flex
+        font-size: $h4-font-size
+        font-weight: bold
+        color: $color-primary-dark-2
+
+
+    &__props
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      padding-top: 0.5rem
+
+
+  &__buttons
+    width: 100%
+    display: flex
+    justify-content: flex-end
+    gap: 3rem
+
+
+.edit-tap
+  @media only screen and (max-width: $bp-md)
+    display: none
+
+
+

@@ -1,0 +1,13 @@
+@defer (on immediate) {
+  <div class="container">
+    @for (book of topBooks(); track book.id) {
+      <app-book-list-item
+        [bookItem]="book"
+      ></app-book-list-item>
+    } @empty {
+      <div>There is no book to list</div>
+    }
+  </div>
+} @loading (minimum 1s) {
+  <h3>Is Loading...</h3>
+}
