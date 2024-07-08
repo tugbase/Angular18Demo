@@ -103,6 +103,7 @@ export const BookStore = signalStore(
             equalTo(userId ? userId : '')
           ),
           (snapshot) => {
+
             patchState(store, {
               bookList:
                 databaseService.snapshotToArray(snapshot),

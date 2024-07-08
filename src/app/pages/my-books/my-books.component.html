@@ -40,6 +40,8 @@
         [bookItem]="book"
         (rate)="updateRate($event)"
       ></app-book-list-item>
+    } @empty {
+        You have not added a book yet!
     }
   } @loading (minimum 1s) {
     <div>It is loading...</div>

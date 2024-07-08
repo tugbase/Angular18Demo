@@ -71,14 +71,14 @@ export class MyBooksComponent implements OnInit {
     this.bookService.bookStore.bookList;
   private afAuth = inject(Auth);
 
+
   constructor() {
     effect(() => {
-      console.log(this.searchInput());
       this.searchInput$
         .pipe(debounceTime(500), distinctUntilChanged())
         .subscribe((search) => {
           if (search === '') {
-            return this.bookService.getBooks();
+            return this.bookService.getUserBooks(this.afAuth.currentUser?.uid!);
           }
           this.bookService.getFilteredBooks(search);
         });
@@ -87,7 +87,6 @@ export class MyBooksComponent implements OnInit {
 
   ngOnInit() {
     this.afAuth.onAuthStateChanged((user) => {
-      console.log('my-books');
       this.bookService.getUserBooks(user?.uid!);
     });
   }

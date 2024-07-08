@@ -77,7 +77,10 @@ export class AllBooksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bookService.getBooks();
+    if(!this.allBooks()) {
+      this.bookService.getBooks();
+    }
+
   }
 
   updateRate(event: any) {

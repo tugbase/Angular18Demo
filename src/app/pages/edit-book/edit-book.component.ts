@@ -25,7 +25,7 @@ export class EditBookComponent implements OnInit {
     this.bookStore.selectedBook;
 
   ngOnInit() {
-    console.log(this.bookId());
+
     if (
       !this.bookToUpdated() ||
       this.bookToUpdated()?.id !== this.bookId()
